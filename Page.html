@@ -4,15 +4,43 @@
 	<title>Next Prime Number</title>
 </head>
 <script type="text/javascript">
+	let PrimeNumbers = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 223, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337];
 function FindPrimeNumbers()
 {
-	let text = document.getElementById("NumberBox").value;
-	let input = parseInt(text);
-	console.log(input);
+	let StartText = document.getElementById("NumberBox").value;
+	let LengthText = document.getElementById("NumberBox").value;
+	//console.log(text);
+	let StartingNumber = parseInt(StartText);
+	let LengthNumber = parseInt(LengthText);
+	console.log(typeof(StartingNumber));
+	primes = getPrimeNumbersAfterStart(StartingNumber, LengthNumber);
+	console.log(primes);
+	document.getElementById("Replace").innerHTML = primes;
+}
+//Get prime numbers after the starting index
+function getPrimeNumbersAfterStart(StartNum, AmountNum)
+{
+	let values = [];
+	for(i = 0; i < PrimeNumbers.length; i++)
+	{
+		//if this element is bigger than the start number, and we have more numbers to count
+		if(PrimeNumbers[i] > StartNum)
+		{ 
+			if(AmountNum !== 0)
+			{
+			//Add that number to our array
+			values.push(PrimeNumbers[i]);
+			AmountNum -= 1;
+			}
+		}
+	}
+	return values;
 }
 </script>
 <body>
-<input type="text" id="NumberBox" value="1"> </input>
-<button onclick="">Push</button>
+<input type="text" id="NumberBox" value="Which number to start at"> </input>
+<button onclick="FindPrimeNumbers()">Push</button>
+<input type="text" id="LengthBox" value="How many prime numbers after this number"> </input>
+<p id="Replace"> Will change into the next prime numbers</p>
 </body>
 </html>
